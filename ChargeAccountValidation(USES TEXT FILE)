@@ -1,0 +1,71 @@
+package chargeaccount;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ *
+ * @author gwendolynsandy
+ */
+public class ChargeAccountMod2 {
+
+    public static void main(String[] args) throws FileNotFoundException {
+
+        int userInput;
+        boolean results = false; // Boolean for main method
+
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("Enter your account number ");
+        userInput = keyboard.nextInt();
+
+        //Call the sequential search
+        results = sequentialSearch(userInput);
+        if (results == true) {
+            System.out.println("Account number entered is valid.");
+        } else {
+            System.out.println("Account number entered is invalid.");
+        }
+
+    }
+
+    public static boolean sequentialSearch(int userInput1) throws FileNotFoundException {
+
+        // Create new ArrayList.
+        ArrayList<Integer> elements = new ArrayList<Integer>();
+
+        boolean found = false;   // Return 
+        int index = 0;     // counter and loop
+
+        //Code for testing variables.
+        // System.out.println(userInput1);
+        // Opens and reads file
+        File file = new File("Modification");
+        Scanner inputFile = new Scanner(file);
+
+        // Reads from  file content into array.
+        while (inputFile.hasNextLine()) {
+            elements.add(inputFile.nextInt());
+        }
+
+        //System.out.println("test" + elements); // Tester.
+        // Close the file
+        inputFile.close();
+
+        //Search the Array
+        while (!found && index < elements.size()) {
+
+            if (elements.get(index) == userInput1) {
+                found = true;
+            } else {
+                found = false;
+            }
+            index++;
+        }
+
+        return found;
+
+    }
+
+}
